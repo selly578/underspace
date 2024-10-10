@@ -12,7 +12,8 @@ def board(request,name):
     posts = Post.objects.filter(board__name__contains=name).all()
     form = PostForm()
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST,request.FILES)
+        print(request.FILES)
         if form.is_valid():
             board = Board.objects.filter(name=name).first()
             post = form.save(commit=False)

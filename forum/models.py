@@ -15,9 +15,13 @@ class Post(models.Model):
     content = models.TextField(max_length=50000,verbose_name="Isi")
     date_created = models.DateTimeField(auto_now_add=True)
     board = models.ForeignKey(Board,on_delete=models.CASCADE)
+    attachment = models.ImageField(upload_to="attachment",null=True,help_text="maksimal gambar berukuran 500kb")
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ["-date_created"]
 
 class Comment(models.Model):
     comment = models.TextField(max_length=50000,verbose_name="Komentar")
