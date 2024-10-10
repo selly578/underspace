@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid bg-dark text-light p-5">
+    <div class="container bg-dark p-5">
+        <h1 class="display-4">Hello world! ^^</h1>
+        <h2>Selamat datang di ... <h2>
+        <hr>
+    </div>
+</div>
+<div class="container mt-5">
+    {% for board in boards  %}
+        <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <div class="card-body">
+            <h3 class="card-title">
+                <a href="{% url 'board' board.name %}" class="text-decoration-none">
+                    {{board.name}}
+                </a>
+            </h3>
+            <main class="card-text">
+                {{board.description }}
+            </main>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

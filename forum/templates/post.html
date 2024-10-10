@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">
+                    {{post.title}}
+                </h1>
+                <small>
+                    {{post.date_created}}
+                </small>
+                <main class="card-text mt-3">
+                    {{post.content}}
+                </main>
+            </div>
+        </div>
+        <style>
+            textarea{
+                height: 125px;
+            }
+            .card{
+                min-height: 250px;
+            }
+        </style>
+        <form method="post" class="my-5">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-primary">
+                Komen
+            </button>
+        </form>
+        <div class="mt-5">
+            {% for comment in comments  %}
+                <div class="mb-3">
+                    <p>
+                        {{comment.comment}}
+                    </p>
+                    <small>{{comment.date_created}}</small>
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
