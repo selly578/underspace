@@ -6,7 +6,7 @@ from .forms import PostForm,CommentForm
 
 def index(request):
     boards = Board.objects.all()
-    return render(request,"index.html",{"boards": boards})
+    return render(request,"index.html",{"boards": boards,"title": "Underspace - Tempat cerita tanpa batas"})
 
 def board(request,name):
     posts = Post.objects.filter(board__name__contains=name).all()
