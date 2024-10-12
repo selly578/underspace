@@ -15,7 +15,7 @@ class Post(models.Model):
     content = models.TextField(max_length=50000,verbose_name="Isi")
     date_created = models.DateTimeField(auto_now_add=True)
     board = models.ForeignKey(Board,on_delete=models.CASCADE)
-    attachment = models.ImageField(upload_to="attachment",null=True,help_text="maksimal gambar berukuran 500kb")
+    attachment = models.ImageField(upload_to="attachment",null=True,help_text="maksimal gambar berukuran 500kb",blank=True)
 
     def __str__(self):
         return self.title
