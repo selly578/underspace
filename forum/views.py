@@ -19,7 +19,7 @@ def board(request,name):
             post = form.save(commit=False)
             post.board = board
             post.save()
-            return redirect("board",name=name)
+            return redirect("post",name=name,id=post.id)
     return render(request,"board.html",{"posts": posts,"title": name,"form": form})
 
 def post(request,name,id):
