@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block meta %}
 {% if post.attachment %}
-<meta name="og:image" content="{{post.attachment.url}}">
+<meta name="og:image" content="{{request.get_host}}/{{post.attachment.url}}">
 {% endif %}
 <meta name="og:site_name" content="underspace">
 <meta name="og:description" content="{{post.conent|truncatechars:150}}"> 
