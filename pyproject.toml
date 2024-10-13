@@ -13,6 +13,7 @@ django-crispy-forms = "^2.3"
 crispy-bootstrap5 = "^2024.10"
 pillow = "^10.4.0"
 python-dotenv = "^1.0.1"
+markdown = "^3.7"
 
 
 [build-system]
