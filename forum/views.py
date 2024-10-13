@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Board,Post,Comment
+from markdown import markdown 
+from .models import Board,Post,Comment,Announcement
 from .forms import PostForm,CommentForm
 
 # Create your views here.
@@ -34,3 +35,22 @@ def post(request,name,id):
         comment.save()
         return redirect("post",name=name,id=id)
     return render(request,"post.html",{"post": post,"form": form,"title": post.title,"comments": comments})
+
+def rule(request):
+    # print(rule)
+    rule = Announcement.objects.filter(title="Peraturan").first()
+    rule_content = rule.content
+    rule_author = rule.author 
+
+    if not rule_content:
+        rule_content = ""
+    rule_content = markdown(rule_content)
+    return render(request,"rule.html",{"title": "Peraturan","rule_content": rule_content,"author": rule_author})
+
+
+def about(request):
+    about = Announcement.objects.filter(title="Tentang").first()
+    if not about:
+        about = ""
+    about = markdown(about)
+    return render(request,"rule.html",{"title": "Tentang website ini","rule_content": about,"author": None})
