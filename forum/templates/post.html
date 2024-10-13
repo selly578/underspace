@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block meta %}
-{% if post.attachement %}
+{% if post.attachment %}
 <meta name="og:image" content="{{post.attachment.url}}">
 {% endif %}
 <meta name="og:site_name" content="underspace">
