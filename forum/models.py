@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files import File
+from PIL import Image
+from io import BytesIO
+from datetime import datetime 
 
 # Create your models here.
 class Board(models.Model):
@@ -9,6 +13,12 @@ class Board(models.Model):
     def __str__(self):
         return self.name
 
+def compress(image):    
+    im = Image.open(image)   
+    im_io = BytesIO()     
+    im.save(im_io, "JPEG", quality=60)     
+    new_image = File(im_io, name=f"{datetime.now()}.jpeg")    
+    return new_image
 
 class Post(models.Model):
     title = models.CharField(max_length=200,verbose_name="Judul",help_text="Maksimal 50 karakter")
@@ -20,6 +30,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+    def save(self,*args, **kwargs):
+        self.attachment = compress(self.attachment)
+        super().save(*args, **kwargs)
+
     class Meta:
         ordering = ["-date_created"]
 

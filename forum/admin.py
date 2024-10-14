@@ -1,6 +1,4 @@
-from typing import Any
 from django.contrib import admin
-from django.http import HttpRequest
 from .models import Board,Post,Comment,Announcement
 
 # Register your models here.
@@ -13,12 +11,21 @@ class BoardAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ("id","title","date_created")
 
-    def has_add_permission(self, request: HttpRequest):
+    def has_add_permission(self,*args, **kwargs):
+        return False
+    
+    def has_change_permission(self,*args, **kwargs):
         return False
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("id","date_created")
+
+    def has_add_permission(self,*args, **kwargs):
+        return False
+    
+    def has_change_permission(self,*args, **kwargs):
+        return False
 
 @admin.register(Announcement)
 class AnnoucementAdmin(admin.ModelAdmin):
@@ -26,12 +33,10 @@ class AnnoucementAdmin(admin.ModelAdmin):
     readonly_fields = ("author",)
     
     def save_model(self, request, obj, form, change):
-        # associating the current logged in user to the client_id
         obj.author = request.user
         super().save_model(request, obj, form, change)
 
     def get_readonly_fields(self, request, obj=None):
-        # Tambahkan username ke readonly fields
         if obj is not None:
             return self.readonly_fields + ('admin',)
         return self.readonly_fields
