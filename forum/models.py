@@ -34,7 +34,8 @@ class Post(models.Model):
         return self.title
     
     def save(self,*args, **kwargs):
-        self.attachment = compress(self.attachment)
+        if self.attachment:
+            self.attachment = compress(self.attachment)
         super().save(*args, **kwargs)
 
     class Meta:
