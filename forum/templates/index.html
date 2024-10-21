@@ -17,7 +17,9 @@
     <h1>Boards</h1>
     <p>Pastikan untuk membaca <a href="{% url 'rule' %}">Peraturan</a> sebelum membuat sebuah postingan </p>
     <hr>
+    <div class="row">
     {% for board in boards  %}
+      <div class="col-md-6 col-12  ">
         <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
             <div class="card-body">
             <h3 class="card-title">
@@ -28,8 +30,11 @@
             <main class="card-text">
                 {{board.description }}
             </main>
+            Jumlah post: {{board.count_posts}}
             </div>
         </div>
+      </div>
     {% endfor %}
+    </div>
 </div>
 {% endblock content %}

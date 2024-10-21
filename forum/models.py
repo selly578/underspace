@@ -13,6 +13,9 @@ class Board(models.Model):
     def __str__(self):
         return self.name
 
+    def count_posts(self):
+        return Post.objects.filter(board=self.id).count()
+
 def compress(image):    
     im = Image.open(image)   
     im_io = BytesIO()     
